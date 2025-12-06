@@ -27,6 +27,10 @@ service-voiture/    # Microservice de gestion des voitures
   - `service-voiture` : `/api/car` (GET, POST, PUT/{id}, DELETE/{id})
 - **Configuration centralisée** : Utilisation de fichiers `application.yml` pour chaque service.
 
+## Initialisation des données
+
+Pour peupler la base de données du service voiture avec des exemples, un fichier `data.sql` est fourni dans `service-voiture/src/main/resources/data.sql`. Les données sont insérées automatiquement au démarrage du service.
+
 ## Démarrage rapide
 
 1. **Lancer Eureka Server**  
@@ -54,9 +58,22 @@ service-voiture/    # Microservice de gestion des voitures
 4. **Accéder aux endpoints via la Gateway**  
    Exemple :  
    - [http://localhost:8888/service-client/api/client](http://localhost:8888/service-client/api/client)
-   <img width="529" height="638" alt="Image" src="https://github.com/user-attachments/assets/c043abc1-3baf-4b50-9375-f5df634d9ad9" />
+     <img width="529" height="638" alt="Image" src="https://github.com/user-attachments/assets/c043abc1-3baf-4b50-9375-f5df634d9ad9" />
    - [http://localhost:8888/service-voiture/api/car](http://localhost:8888/service-voiture/api/car)
-   <img width="633" height="916" alt="Image" src="https://github.com/user-attachments/assets/1da6d1d0-ff6b-43b9-8b75-07be7a20c59f" />
+     <img width="633" height="916" alt="Image" src="https://github.com/user-attachments/assets/1da6d1d0-ff6b-43b9-8b75-07be7a20c59f" />
+
+## Configuration
+
+- Les ports et noms des services sont configurés dans les fichiers `application.yml`.
+- Les services doivent utiliser des noms cohérents (ex : `service-voiture` et non `SERVICE-CAR`).
+- Les bases de données MySQL doivent être accessibles et configurées dans chaque microservice.
+
+## Tests
+
+Des classes de test sont présentes dans chaque module (`src/test/java`). Pour lancer les tests :
+```
+./mvnw test
+```
 
 ## Extensions possibles
 
@@ -74,5 +91,9 @@ service-voiture/    # Microservice de gestion des voitures
 - La Gateway centralise l’accès et le routage.
 - Les configurations sont externalisées.
 - La gestion des erreurs et la résilience sont essentielles.
+
+## Déploiement
+
+Pour déployer en production, il est recommandé d’utiliser Docker et Docker Compose pour orchestrer les services, ou Kubernetes pour une solution scalable.
 
 ---
